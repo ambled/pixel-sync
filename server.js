@@ -40,6 +40,9 @@ var channel = new function () {
       case "part":
         sys.puts(nick + " part");
         break;
+      case "rgb":
+        sys.puts("<" + nick + "> RGB: " + text);
+        break;
     }
 
     messages.push( m );
@@ -193,6 +196,22 @@ fu.get("/recv", function (req, res) {
 });
 
 fu.get("/send", function (req, res) {
+  var id = qs.parse(url.parse(req.url).query).id;
+  var text = qs.parse(url.parse(req.url).query).text;
+
+  var session = sessions[id];
+  if (!session || !text) {
+    res.simpleJSON(400, { error: "No such session id" });
+    return;
+  }
+
+  session.poke();
+
+  channel.appendMessage(session.nick, "msg", text);
+  res.simpleJSON(200, { rss: mem.rss });
+});
+
+fu.get("/rgb", function (req, res) {
   var id = qs.parse(url.parse(req.url).query).id;
   var text = qs.parse(url.parse(req.url).query).text;
 

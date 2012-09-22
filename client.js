@@ -431,6 +431,13 @@ function who () {
   }, "json");
 }
 
+//Trigger a button click handler as a message
+function rgb (msg) {
+  if (CONFIG.debug === false) {
+    jQuery.get("/rgb", {id: CONFIG.id, text: msg}, function (data) { }, "json");
+  }
+}
+
 $(document).ready(function() {
 
   //submit new messages when the user hits enter if the message isnt blank
@@ -442,6 +449,11 @@ $(document).ready(function() {
   });
 
   $("#usersLink").click(outputUsers);
+  $("#rgbBlack").click(function () { rgb("black"); });
+  $("#rgbWhite").click(function () { rgb("white"); });
+  $("#rgbRed").click(function () { rgb("red"); });
+  $("#rgbGreen").click(function () { rgb("green"); });
+  $("#rgbBlue").click(function () { rgb("blue"); });
 
   //try joining the chat when the user clicks the connect button
   $("#connectButton").click(function () {
