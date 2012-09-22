@@ -215,6 +215,11 @@ fu.get("/rgb", function (req, res) {
   var id = qs.parse(url.parse(req.url).query).id;
   var text = qs.parse(url.parse(req.url).query).text;
 
+  if (!/^(black|white|red|green|blue)$/i.test(text)) {
+    res.simpleJSON(400, { error: "pixel message not valid" });
+    return;
+  }
+
   var session = sessions[id];
   if (!session || !text) {
     res.simpleJSON(400, { error: "No such session id" });
