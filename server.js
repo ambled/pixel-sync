@@ -223,6 +223,6 @@ fu.get("/rgb", function (req, res) {
 
   session.poke();
 
-  channel.appendMessage(session.nick, "msg", text);
+  channel.appendMessage(session.nick, "pixel", text);
   res.simpleJSON(200, { rss: mem.rss });
 });

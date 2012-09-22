@@ -187,6 +187,13 @@ function scrollDown () {
   $("#entry").focus();
 }
 
+
+//Switch all users backgrounds
+function pixel ( rgb ) {
+  document.body.style.backgroundColor = rgb;
+}
+
+
 //inserts an event into the stream for display
 //the event may be a msg, join or part type
 //from is the user, text is the body and time is the timestamp, defaulting to now
@@ -289,6 +296,11 @@ function longPoll (data) {
           if(!CONFIG.focus){
             CONFIG.unread++;
           }
+          addMessage(message.nick, message.text, message.timestamp);
+          break;
+
+        case "pixel":
+          pixel(message.text);
           addMessage(message.nick, message.text, message.timestamp);
           break;
 
