@@ -108,3 +108,7 @@ a:hover { text-decoration: underline; color: #aaa; }
 #usersLink {
   color: inherit;
 }
+
+#rgbBlack #rgbWhite #rgbRed #rgbGreen #rgbBlue {
+ text-decoration: underline; color: #aaa; 
+}
